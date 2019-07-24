@@ -12,8 +12,6 @@
 
      * [第一节：强制获取remote文件 本地文件删除后](Chapter2/git获取文件.md)
 
-       
-
 * [第三章](Chapter3/README.md)
 
 * [第四章](Chapter4/README.md)

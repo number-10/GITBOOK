@@ -29,7 +29,7 @@ C:\Users\number10\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManage
   ren *.* *.
   ```
 
-  ![cmd1](.\assets\cmd1.png)
+  ![cmd1](./assets/cmd1.png)
   
   
 
