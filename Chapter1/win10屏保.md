@@ -8,11 +8,11 @@ C:\Users\number10\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManage
 
 * Users 即 **用户**
 
-* number10为用户名，s
+* number10为用户名
 
 如下图，是没有后缀的文件
 
-![wallper1](./assets/wallper1.png)
+![wallper1](.\assets\wallper1.png)
 
 ## 2、win10 cmd 批量更改文件后缀 ren/rename命令
 
