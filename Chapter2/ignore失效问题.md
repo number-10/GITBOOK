@@ -7,5 +7,7 @@
 具体方案：
 
 ```
-git rm --cached java/.idea/workspace.xml
+git rm --cached <file>  
 ```
+
+然后再add等
