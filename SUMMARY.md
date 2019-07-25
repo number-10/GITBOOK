@@ -12,7 +12,7 @@
 	* [第一节：强制获取remote文件 本地文件删除后](Chapter2/git获取文件.md)
 	* [第二节：本地项目提交git仓库](Chapter2/本地项目提交git仓库.md)
 	* [第三节：ignore失效问题](Chapter2/ignore失效问题.md)
-	* [第四节：SSH key](Chapter2/SSH key.md)
+	* [第四节：SSHkey](Chapter2/SSHkey.md)
 * [第三章](Chapter3/README.md)
 
 * [第四章](Chapter4/README.md)
