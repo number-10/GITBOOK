@@ -22,39 +22,43 @@ MongoDB适用于文件，是nosql。**但本质仍是数据库**
 
 #### 		**启动服务，-windows**
 
+  	```	
   		%MONGODB_HOME$\bin\mongod.exe   --config  .\mongod.cfg --port [port]  --auth --logappend
+  		```
 
-         #### 		**登录**
+#### 		**登录**
 
-​          mongo --port [port]
-
-  		#### 		创建用户 注意空格todo
-
-​			db.createUser({
-
-​			"user","root",
-
-​			"pwd","root",
-
-​			"roles":[{"role":"root","db","xxdb"}]
-
-​			};
+	mongo --port [port]
 
 
 
-​          **验证用户**
+#### 		创建用户 注意空格todo
 
-​		先切换到所属数据库再验证  
+```
+db.createUser({
+			"user","root",
+			"pwd","root",
+			"roles":[{"role":"root","db","xxdb"}]
+};
+```
 
-​         use admin;
 
-​          db.auth([user],[pwd]);
+
+
+ **验证用户**
+
+先切换到所属数据库再验证  
+
+```
+use admin;
+db.auth([user],[pwd]);
+```
 
 
 
 //展示库
 
-show dbs;
+`show dbs;`
 
 #### auth
 

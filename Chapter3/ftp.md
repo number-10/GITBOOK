@@ -98,9 +98,21 @@ ftpuser1​：x:1002:1002::/home/ftpuser1:/bin/bash
 
 /todo 123123
 
-##### 2-4 建立一个ftp用户能访问所有目录（包括其它ftp目录）
+##### 2-4 除本身主目录外还能访问其他目录（绑定挂载方案）
 
 /todo 123123
+
+other是新目录 重要，挂载后 挂载点会隐藏挂载前的子文件级目录
+
+mkdir otherdir
+
+mount --bind /home/ftp1 otherdir
+
+这样FTP登录账号就可以访问otherdir了。
+
+
+
+mount --bind  /home/ftp_gjj/person  /data/SZGJJ/PUT_HERE
 
 
 
