@@ -49,7 +49,30 @@ You should stop it and try again.
 
 RangeError [ERR_SOCKET_BAD_PORT]: Port should be >= 0 and < 65536. Received 352730.
 
-
+## 发布相关book.json
+{
+  "title": "mybook",
+  "author" : "xf",
+  "description": "desc",
+  "language": "zh-hans",
+  "styles": {
+	"website": "styles/website.css"
+  },
+  "plugins": [ 
+	"chapter-fold"
+  ]
+}
+### 目录折叠
+*1 在主目录里创建 book.json 加插件 chapter-fold 或者 expandable-chapters
+*2 在主目录下使用 gitbook install 
+### 去掉 本书使用gitbook发布 
+*1 在主目录下新加 style目录，再新加website.css文件。内容为：
+```
+ .gitbook-link {
+      display: none !important;
+  }
+```
+*2 在主目录下使用 gitbook install 
 
    链接：https://www.jianshu.com/p/02caaaaa97ef
 

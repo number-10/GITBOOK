@@ -1,0 +1,13 @@
+{
+  "title": "mybook",
+  "author" : "xf",
+  "description": "desc",
+  "language": "zh-hans",
+  "styles": {
+	"website": "styles/website.css"
+  },
+  "plugins": [ 
+
+	"chapter-fold"
+  ]
+}
