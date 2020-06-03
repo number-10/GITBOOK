@@ -9,24 +9,46 @@
  added 578 packages from 672 contributors in 26.369s
  ```
  3、查看gitbook版本 **gitbook -V ** -V是大写
- 
+
 ## 基本命令
   * 初始化gitbook,
     ```gitbook init```
-  执行完后，你会看到多了两个文件 —— README.md 和 SUMMARY.md，它们的作用如下：
+    执行完后，你会看到多了两个文件 —— README.md 和 SUMMARY.md，它们的作用如下：
   ```
    README.md —— 书籍的介绍写在这个文件里
    SUMMARY.md —— 书籍的目录结构在这里配置
-   ```
+  ```
   目录写后再次 gitbook init gitbook会查找 summary.md 里的目录和文档，建立相应文档。有的话跳过。
-  
+
   * 构建和运行
   ```
     gitbook build
     gitbook serve --port [port]
-   ```
+  ```
    --port [port] 可省略。默认端口号4000  。静态网站输出到 _book 
     
+
+## 同时运行多个服务
+
+* 需要修改监听端口和服务端口  默认监听端口35729，服务端口4000
+
+ ```  
+ gitbook serve --lrport 60000 --port 4001 
+ ```
+
+否则可能的错误。faq:
+
+1
+
+Error: listen EADDRINUSE: address already in use :::35729
+
+You already have a server listening on 35729
+You should stop it and try again.
+
+2
+
+RangeError [ERR_SOCKET_BAD_PORT]: Port should be >= 0 and < 65536. Received 352730.
+
 
 
    链接：https://www.jianshu.com/p/02caaaaa97ef
