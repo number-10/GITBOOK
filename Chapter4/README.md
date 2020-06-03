@@ -6,3 +6,4 @@
 ## Summary
  * [第四章 GITBOOK](README.md)
      * [gitbook命令](gitbook命令.md)
+     * [gitbookFAQ](gitbookFAQ.md)
