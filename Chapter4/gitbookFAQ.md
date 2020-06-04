@@ -1,6 +1,6 @@
 # gitbook FAQ
 
-**Q:**
+**Q1:**
 
     Error: ENOENT: no such file or directory, stat 'E:\GITBOOK\book1\_book\gitbook\gitbook-plugin-sharing\buttons.js'	
 
@@ -17,8 +17,23 @@
 
 
 
-
-
-
-
 **分析:**  是一个自带bug（Vesion：3.2.3）
+
+
+
+**Q2:_book下html无法跳转问题**
+
+**A1:**  切换gitboob serve 版本
+
+```
+gitbook ls-remote
+gitbook fetch 低版本
+```
+
+
+
+**A2:**更改**_book->gitbook->theme.js****文件
+
+* 找到下面的代码搜索  `if(m)for(n.handler` 
+
+* 将`if(m)`改成`if(false)`  保存
