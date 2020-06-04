@@ -6,3 +6,6 @@
 
 #idea
 /.idea
+
+#zip
+*.zip
