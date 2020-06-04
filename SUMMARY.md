@@ -30,7 +30,7 @@
     * [物品](Chapter11：record/物品.md)
     * [稀缺](Chapter11：record/稀缺.md)
     * [要看的](Chapter11：record/要看的.md)
-* [第四十一章 阿里云域名解析](Chapter41-ailiyun/README.md)
+* [第四十一章 域名相关](Chapter41-ailiyun/README.md)
     * [子域名](Chapter41-ailiyun/子域名.md)
 * [第一百章 职业](Chapter100：occupation/README.md)
     * [职业要求](Chapter100：occupation/职业要求.md)
