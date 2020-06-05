@@ -7,6 +7,7 @@
     * [第3节：住](Chapter1/住.md)
     * [第4节：行](Chapter1/行.md)
 * [第二章 GIT操作](Chapter2/README.md)
+    * [第零节：git基本命令](Chapter2/git基本命令.md)
     * [第一节：强制获取remote文件 本地文件删除后](Chapter2/git获取文件.md)
     * [第二节：本地项目提交git仓库](Chapter2/本地项目提交git仓库.md)
     * [第三节：ignore失效问题](Chapter2/ignore失效问题.md)
