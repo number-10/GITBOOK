@@ -1,6 +1,6 @@
 # jenkins
 
-## 安装 windows 版
+## 一、安装 windows 版
 
 下载列表：http://mirrors.jenkins.io/war-stable/
 下载地址:http://mirrors.jenkins.io/war-stable/latest/jenkins.war
@@ -27,4 +27,24 @@
 
 您可以--httpPort在运行java -jar jenkins.war命令时通过指定选项 来更改端口。例如，要使Jenkins通过端口9090可访问，请使用以下命令运行Jenkins：
 java -jar jenkins.war --httpPort=9090
+
+## 二、构建maven项目
+
+前提：
+
+* .**maven插件**：管理jenkins->管理插件->可选插件->安装maven插件。名称是[Maven Integration](https://plugins.jenkins.io/maven-plugin)  翻译：maven整合。文档编写时是3.6。点击下方的直接安装
+
+* **git 插件**
+
+
+
+[官方文档参考](https://github.com/jenkinsci/pipeline-plugin/blob/master/TUTORIAL.md#understanding-flow-scripts)
+
+
+
+**Faq:**
+
+Q:java.io.IOException: CreateProcess error=2, 系统找不到指定的文件。
+
+A:pipeline script 若在windwos上 命令应用bat而不是sh
 

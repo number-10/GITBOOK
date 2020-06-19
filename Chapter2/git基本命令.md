@@ -46,3 +46,14 @@ git pull origin online
 
 * **git pull的默认行为是git fetch + git merge**
 
+
+
+### git clone
+
+**A:** git clone -b master git@github.com:number-10/Library-sframe-sc.git
+
+**B:** git clone -b master git@github.com:number-10/Library-sframe-sc.git     ./
+
+区别。
+
+如何去除主目录 采用方法B
