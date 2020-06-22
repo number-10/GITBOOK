@@ -6,6 +6,6 @@
 
 ## Summary
 * [第二十章 bat](Chapter20-bat/README.md)
-    * [第一节: bat命令](Chapter20-bat/bat.md)
+    * [第一节: bat命令](bat.md)
 
 
