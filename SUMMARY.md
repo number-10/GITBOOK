@@ -25,6 +25,7 @@
 * [第七章 JENKINS](Chapter7/README.md)
     * [docker](Chapter7/docker.md)
     * [docker-linux](Chapter7/docker-linux.md)
+    * [nodejs](Chapter7/nodejs.md)
     * [README](Chapter7/README.md)
     * [jenkins](Chapter7/jenkins.md)
 * [第八章 MYSQL](Chapter8/README.md)
