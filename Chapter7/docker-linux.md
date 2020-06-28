@@ -69,7 +69,19 @@ ____
 
 ***
 
+* **查看docker 里安装的软件目录配置，**如 jenkins ，redis 等。
 
+  ```
+  docker exec -it 容器id /bin/bash
+  ```
+
+  这些容器依赖于新的"操作系统"，docker 依赖centons7内核生成的。每个软件都对应一个“操作系统”。本质是宿主机进程
+
+  **进入容器且有权限**：如创建文件，软连接等
+
+  ```ker exec   --privileged=true -it d85 /bin/bash``` 全局配置命令
+
+  
 
 * 查看所有本地镜像
 
@@ -114,6 +126,16 @@ Authentication is required to manage system services or units.
 Authenticating as: root
 Password: 
 ==== AUTHENTICATION COMPLETE ===
+```
+
+
+
+docker 容器内安装yum
+
+```
+apt-get update
+apt-get install vim -y
+apt-get install yum -y
 ```
 
 
@@ -169,7 +191,7 @@ docker images
 * **2** 运行 nginx 容器：
 
 ```
-$ docker run --name nginx-test -p 9901:80 -d  d-nginx
+$ docker run --name nginx-test -p 9901:80 -d  d-nginx  
 $ docker images
 ```
 
@@ -178,6 +200,8 @@ $ docker images
 - **--name nginx-test**：容器名称（ 自设）。
 - **- p 9901:80**： 端口进行映射，将本地 9901端口映射到容器内部的 80 端口。
 - **-d nginx**： 设置容器在在后台一直运行。
+
+  
 
 
 
