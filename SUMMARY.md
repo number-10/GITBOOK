@@ -16,6 +16,7 @@
 * [第三章 LINUX](Chapter3/README.md)
     * [第一节：ftp账号](Chapter3/ftp.md)
 * [第四章 GITBOOK](Chapter4/README.md)
+    * [markdown](Chapter4/markdown.md)
     * [gitbook命令](Chapter4/gitbook命令.md)
     * [gitbookFAQ](Chapter4/gitbookFAQ.md)
 * [第五章 NoSQL](Chapter5/README.md)
