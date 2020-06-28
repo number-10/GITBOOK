@@ -27,6 +27,24 @@
 
 具体方案：
 
+文件
+
 ```
 git rm --cached <file>  
 ```
+
+
+
+文件夹
+
+法一：
+
+ git rm --cached  -r 文件夹
+
+
+
+法二:全部移除，再全部加上
+
+ `git rm -r --cached .`
+
+`git add .`
