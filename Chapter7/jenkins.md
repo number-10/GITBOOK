@@ -126,6 +126,8 @@ A:改/etc/sysconfig/jenkins（此文件是从/etc/init.d/jenkins里获取的）�
 
  JENKINS_USER="root"
 
+ ** 
+
 
 
 **Q2:显示Starting jenkins (via systemctl):                          [  OK  ]  但仍未启动。**
@@ -140,6 +142,22 @@ JENKINS_PID_FILE="/var/run/jenkins.pid"
 JENKINS_LOCKFILE="/var/lock/subsys/jenkins"
 
 可用stop命令 删除 LOCKFILE.再启动
+
+
+
+**Q3:** 忘记登录密码
+
+1找到jenkins_home 可用ps -ef|grep jenkins 查看
+
+2进入jenkins_home 目录修改 config.xml 里的
+
+```
+  <mode>NORMAL</mode>
+  <useSecurity>true</useSecurity>
+  <authorizationStrategy class="hudson.security.AuthorizationStrategy$Unsecured"/>
+```
+
+true 改为false。 再重启```systemctl restart  jenkins```即可直接登录。然后进入也没改密码
 
 ## 二、构建项目
 
