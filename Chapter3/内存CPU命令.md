@@ -1,6 +1,7 @@
 # 内存CPU命令
 
-###查看内存使用情况
+### 查看内存使用情况
+
 ```
 free -m
 free -h
@@ -8,7 +9,19 @@ free -h
 
 -h 指人性化显示，根据大小显示一般为K,M,G。而不是B
 
-###清除缓存
+
+
+
+
+####  内存使用倒叙排列
+
+```
+ps -eo pmem,pcpu,rss,vsize,args | sort -k 1 -r | less
+```
+
+
+
+### 清除缓存
 
 * 清除页面缓存
 sync; echo 1 > /proc/sys/vm/drop_caches

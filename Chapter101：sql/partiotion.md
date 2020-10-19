@@ -125,3 +125,19 @@ PARTITION BY RANGE (DJRQ) INTERVAL (numtoyminterval(1, 'year'))
 **联想思考** etl 增量抽取 可采用CDC方式方式， 对源表的每天记录的监测字段形成hash值保存在CDC表其中一列。后续定期抽取比较hash值，若有变化，则抽取等操作。
 和 分区表的hash分区
 
+
+
+
+
+## 查询分区表
+
+**查询所以的分区表**
+
+```SELECT TABLE_NAME,PARTITION_NAME,TABLESPACE_NAME  FROM USER_TAB_PARTITIONS```
+
+查询某个表的分区表
+
+```
+select * from fan.YW_P_CYZXX_FQ_MAX partition(YW_P_CYZXX_FQ_MAX_2019)
+```
+
