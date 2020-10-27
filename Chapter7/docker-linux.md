@@ -79,9 +79,33 @@ ____
 
   **进入容器且有权限**：如创建文件，软连接等
 
-  ```ker exec   --privileged=true -it d85 /bin/bash``` 全局配置命令
+  ```docker exec   --privileged=true -it d85 /bin/bash``` 全局配置命令
 
   
+
+  **容器内文件复制出来**
+
+  ```
+  docker cp <容器id>:/xxx1  /xxx2
+  ```
+
+  在docker外执行；xxx1为容器内目录，docker ps 可查看在运行的容器； xxx2为容器外目录
+
+  
+
+    **主机文件放到容器目录内**
+
+     ```
+  docker cp  /data  deffdaf212:/data1/
+     ```
+  
+  在主机里/docker外执行。 /data为主机内目录； /data1/为容器内目录
+
+​       // todo 
+
+​       deffdaf212:/data1/ 放在目录下
+
+​       deffdaf212:/data1  把/data 放到容器内后，重命名为data1
 
 * 查看所有本地镜像
 
