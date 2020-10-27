@@ -1,8 +1,10 @@
+
+
 # git基本命令
 
 **原则: git push 和 pull都是对应本机来说.所以前面为 git push/pull  <远程主机名>**
 
-**后面为 <源>:<目的>**
+**后面为 <源分支>:<目的分支>**
 
 
 
@@ -14,7 +16,7 @@ $ git push <远程主机名>   <本地分支名>:<远程分支名>
 
 
 
-
+  <本地分支名>:   可省略，代表当前分支。
 
 
 
@@ -57,3 +59,136 @@ git pull origin online
 区别。
 
 如何去除主目录 采用方法B
+
+
+
+### 查看分支&切换&新建
+
+#### 查看
+
+##### 本地分支
+
+查看分支列表 *代表当前检出/选中的分支
+
+```
+git branch
+* master
+```
+
+查看分支最后一次提交
+
+```
+$ git branch -v
+* master 9c0d0dc pom
+```
+
+
+
+##### 远程分支
+
+查看所有远程分支
+
+```
+$ git branch  -r
+  origin/HEAD -> origin/master
+  origin/master
+```
+
+ `git remote show <remote>` 获得远程分支的更多信息
+
+```
+$ git remote show origin
+* remote origin
+  Fetch URL: git@github.com:number-10/Library-sframe-sc.git
+  Push  URL: git@github.com:number-10/Library-sframe-sc.git
+  HEAD branch: master
+  Remote branch:
+    master tracked
+  Local branch configured for 'git pull':
+    master merges with remote master
+  Local ref configured for 'git push':
+    master pushes to master (local out of date)
+
+
+
+```
+
+
+
+##### 本地分支&远程分支一起查看
+
+```
+$ git branch -vv
+* master 9c0d0dc [origin/master] pom
+
+$ git branch -a
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/master
+
+$ git branch -avv
+* master                9c0d0dc [origin/master] pom
+  remotes/origin/HEAD   -> origin/master
+  remotes/origin/master 9c0d0dc pom
+```
+
+git branch -vv：   master 为本地分支， [origin/master] 远程分支
+
+git branch -a：  master 为本地分支， 红色代表服务器情况 remote/origin/mastet远程分支。
+
+remotes/origin/HEAD -> origin/master 应改表示 服务器当前指针指向 origin/master
+
+**一般用git branch -vv** 清晰，简化
+
+
+
+#### 新建
+
+**本地分支**
+
+$ git branch newLocalBranch
+
+**远程分支**
+
+```
+$ git push origin newLocalBranch:newRemoteBranch
+Total 0 (delta 0), reused 0 (delta 0)
+remote:
+remote: Create a pull request for 'newRemoteBranch' on GitHub by visiting:
+remote:      https://github.com/number-10/Library-sframe-sc/pull/new/newRemoteBranch
+remote:
+To github.com:number-10/Library-sframe-sc.git
+ * [new branch]      newLocalBranch -> newRemoteBranch
+
+```
+
+
+
+**本地分支、远程分支 建立联系：**
+
+```
+$ git push -u origin master
+```
+
+
+
+
+
+##### 删除
+
+删除远程分支
+
+git push origin  :<远程分支>
+
+```
+$ git push origin :develop
+To https://github.com/xxx.git
+ - [deleted]         develop
+
+
+```
+
+删除本地分支
+
+git branch -D <分支名>
+
