@@ -9,13 +9,13 @@ oracle,dm7 数据库。mysql无此概念，可用视图
 
 **例子：**
 
-* 创建表A1 的同义词A1
+* 创建表A1 的同义词AS
 ```
-create public synonym A1 for 表所属模式名.A1
+create public synonym AS for 表所属模式名.A1
 
 ```
 
-* 赋权给READ用户
+* 赋权给READ用户  **是赋予原来的表名A1,而不是同义词名称AS**
 ```
 grant select on A1 to READ;
 ```
@@ -25,8 +25,10 @@ grant select on A1 to READ;
 revoke select on A1 from YWKREAD;
 ```
 
-* 删除共有同义词
+
+
+* 删除公有同义词
 
 ```
-drop public synonym A1S2;
+drop public synonym AS;
 ```
