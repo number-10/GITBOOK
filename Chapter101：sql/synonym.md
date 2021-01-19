@@ -32,3 +32,12 @@ revoke select on A1 from YWKREAD;
 ```
 drop public synonym AS;
 ```
+
+
+
+查询同义词情况
+
+```
+SELECT * FROM SYS.ALL_SYNONYMS 
+```
+

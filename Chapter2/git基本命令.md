@@ -64,7 +64,7 @@ git pull origin online
 
 ### 查看分支&切换&新建
 
-#### 查看
+#### 1、查看
 
 ##### 本地分支
 
@@ -82,7 +82,7 @@ $ git branch -v
 * master 9c0d0dc pom
 ```
 
-
+ 
 
 ##### 远程分支
 
@@ -142,11 +142,25 @@ remotes/origin/HEAD -> origin/master 应改表示 服务器当前指针指向 or
 
 
 
-#### 新建
+
+
+
+
+#### 2、切换分支
+
+git checkout  devlop
+
+
+
+#### 3、新建
 
 **本地分支**
 
-$ git branch newLocalBranch
+``` $ git branch newLocalBranch```
+
+新建的分支和本地库一致
+
+
 
 **远程分支**
 
@@ -174,11 +188,21 @@ $ git push -u origin master
 
 
 
-##### 删除
+##### 4、删除
+
+删除本地分支
+
+git branch -D <分支名>
+
+
 
 删除远程分支
 
 git push origin  :<远程分支>
+
+
+
+推送空到远程库分支，空替换远程库分支
 
 ```
 $ git push origin :develop
@@ -188,7 +212,5 @@ To https://github.com/xxx.git
 
 ```
 
-删除本地分支
 
-git branch -D <分支名>
 

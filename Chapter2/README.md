@@ -12,6 +12,7 @@
     * [第五节：本地项目提交git仓库](本地项目提交git仓库.md)
     * [第六节：ignore失效问题](ignore失效问题.md)
     * [第七节：SSHkey](SSHkey.md)
+    * [第八节：常见git问题](常见git问题.md)
 
 
 
