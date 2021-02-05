@@ -1,3 +1,5 @@
+
+
 # markdown
 
 ### 基本语法
@@ -14,7 +16,13 @@
 
 
 
-**链接图片：*   ![photoName](./assets/photoName.png)
+**链接图片：** ！[phoneName](photo)
+
+例：
+
+![photoName](./assets/photoName.png)
+
+
 
 图片源：放在同级的assets文件夹下
 

@@ -12,6 +12,11 @@
 
 [记一次使用poi导入处理Excel中日期格式_weixin_38084097的博客-CSDN博客](https://blog.csdn.net/weixin_38084097/article/details/77242508?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.channel_param)
 
+
+
+[POI 4.1.2 操作 Excel - 简书](https://www.jianshu.com/p/45dc02506b3e)
+
 **word**
 
-[【Java】用Freemarker完美导出word文档（带图片） - 朝雾轻寒 - 博客园
+[【Java】用Freemarker完美导出word文档（带图片） - 朝雾轻寒 - 博客园](https://www.cnblogs.com/zwqh/p/7182953.html)
+

@@ -159,6 +159,57 @@ JENKINS_LOCKFILE="/var/lock/subsys/jenkins"
 
 true 改为false。 再重启```systemctl restart  jenkins```即可直接登录。然后进入也没改密码
 
+
+
+## 新建用户,改密码
+
+#### 1 允许用户注册
+
+主页->系统管理->安全（全局安全配置)->Authentication(安全域)->
+
+jenkins专有用户数据库->**允许用户注册勾上**。
+
+
+
+![1611046913520](E:\GITBOOK\book1\Chapter7\assets\1611046913520.png)
+
+
+
+#### 2-1、注册
+
+主页->注册（右上角）
+![1611047376810](E:\GITBOOK\book1\Chapter7\assets\1611047376810.png)
+
+#### 2-2、改密码
+
+主页-》用户列表-》点击用户-》设置-》密码
+
+![1611047237877](E:\GITBOOK\book1\Chapter7\assets\1611047237877.png)
+
+#### 3、取消注册权限。
+
+
+
+
+
+#### 权限控制
+
+* 安装jenkins用户控制模块 [Role-based Authorization Strategy](https://github.com/jenkinsci/role-strategy-plugin)
+
+* 主页->系统管理->安全（全局安全配置)->Authentication(安全域)->
+
+  jenkins专有用户数据库->**允许用户注册勾上**。
+
+* 添加角色  Jenkins首页---->Manage and Assign Roles------>Manage Roles
+
+* 配置角色权限和项目
+
+* 用户配置所属角色
+
+  
+
+
+
 ## 二、构建项目
 
 **一些插件**：

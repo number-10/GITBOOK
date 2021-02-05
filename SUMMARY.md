@@ -28,6 +28,7 @@
     * [gitbook命令](Chapter4/gitbook命令.md)
     * [gitbookFAQ](Chapter4/gitbookFAQ.md)
 * [第五章 NoSQL](Chapter5/README.md)
+    * [Nginx](Chapter5/Nginx.md)
     * [MongoDB](Chapter5/MongoDB.md)
 * [第六章 SPRING](Chapter6/README.md)
     * [spring](Chapter6/spring.md)
