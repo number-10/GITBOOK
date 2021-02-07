@@ -8,6 +8,20 @@
   },
   "plugins": [ 
 
-	"chapter-fold"
-  ]
+	"chapter-fold",
+    "atoc",
+    "code",
+	"mermaid-gb3",
+	
+	"anchor-navigation-ex"
+  ],
+  "pluginsConfig": {
+    "atoc": {
+      "addClass": true,
+      "className": "atoc"
+    },
+    "code": {
+      "copyButtons": true
+    }
+  }
 }
