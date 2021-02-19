@@ -2,6 +2,20 @@
 
 # git基本命令
 
+
+
+## git commit 
+
+git commit -m "redis"  ./Redis.md
+
+提交暂存区 特定文件
+
+
+
+
+
+***
+
 **原则: git push 和 pull都是对应本机来说.所以前面为 git push/pull  <远程主机名>**
 
 **后面为 <源分支>:<目的分支>**
