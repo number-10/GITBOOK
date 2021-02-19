@@ -29,6 +29,7 @@
     * [gitbookFAQ](Chapter4/gitbookFAQ.md)
 * [第五章 中间件](Chapter5/README.md)
     * [Nginx](Chapter5/Nginx.md)
+    * [Redis](Chapter5/Redis.md)
     * [MongoDB](Chapter5/MongoDB.md)
 * [第六章 SPRING](Chapter6/README.md)
     * [spring](Chapter6/spring.md)

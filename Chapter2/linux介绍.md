@@ -99,3 +99,34 @@ ls is aliased to `ls --color=auto'
 [root@iz2ze56pkpg6dxap2z3qvzz bin]# 
 ```
 
+
+
+### GCC
+
+#### 3、解决办法
+
+升级到 5.3及以上版本
+
+```shell
+yum -y install centos-release-scl
+
+yum -y install devtoolset-9-gcc devtoolset-9-gcc-c++ devtoolset-9-binutils
+
+scl enable devtoolset-9 bash
+
+
+
+#注意：scl命令启用只是临时的，推出xshell或者重启就会恢复到原来的gcc版本。
+#如果要长期生效的话，执行如下：
+echo "source /opt/rh/devtoolset-9/enable" >>/etc/profile
+```
+
+
+
+**P:**
+
+```
+You need tcl 8.5 or newer in order to run the Redis test
+```
+
+**A:**  yum install tcl
