@@ -1,10 +1,5 @@
 # redis
 
-<!-- toc -->
-
-
-
-[TOC]
 
 ## 1. redis 前世今生
 
