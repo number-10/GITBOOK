@@ -1,5 +1,9 @@
 # transacion
 
+
+
+[toc]
+
 # 事务
 
 ## 基本概念
@@ -128,67 +132,189 @@ public enum Propagation {
 
 ### 7种介绍
 
-//todo  加入事务，加入的是什么，上下文？还是上文？本质是加入同一个数据库连接，依赖于数据库默认的事务级别？
+**这里的当前，相当于前提里的上文。** 是站在子事务角度考虑。系统配置模式事务（爷爷）-》父事务-》子事务
 
-#### 1、 默认，REQUIRED 。即@Transactional(propagation=Propagation.REQUIRED)
+| 事务传播行为类型             | 说明                                                         |
+| :--------------------------- | :----------------------------------------------------------- |
+| **PROPAGATION_REQUIRED**     | **如果上文没有事务，就新建一个事务；如果上文有事务中，加入到这个事务中。@Transactional默认配置。** |
+| PROPAGATION_SUPPORTS         | 如果上文没有事务，就以非事务方式执行（都无事务，有异常也不回滚）。上文有事务，就加入 |
+| PROPAGATION_MANDATORY        | 如果上文没有事务，就抛出异常，若封装就不会影响上文。上文有事务，就加入。 |
+| **PROPAGATION_REQUIRES_NEW** | **上文没有事务，现在的新建事务；上文有事务，把上文事务挂起，再新建现在的事务。 上文事务、现在事务互不影响** |
+| PROPAGATION_NOT_SUPPORTED    | 以非事务方式执行操作，如果上文存在事务，就把上文的事务挂起。 |
+| PROPAGATION_NEVER            | 以非事务方式执行，如果上文存在事务，则抛出异常 。            |
+| PROPAGATION_NESTED           | 如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与PROPAGATION_REQUIRED类似的操作。 |
 
-​		常用。一般没加Transactional没加参数就是默认。
+####  前提
 
-​		依赖于数据库的事务级别。
+##### **常识：** 
 
-​		注意：如果被调用端发生异常，那么调用端和被调用端事务都将回滚，反之亦然（注：内层被封装捕获异常处理了不抛出异常外层还是回滚）
+* **抛出异常必须是throw  new RuntimeException(); 其它的起不到回滚作用，throw  new Exception(); 也不行。**
+
+* **无论何种传播配置，子事务加入（不是嵌套）父事务。 有一方事务回滚，另一方必定回滚，无论有没有封装方法捕获异常。**
+
+  **原理是加入就相当于一个事务。子加入父相当于一个事务方法且是不捕获异常的情况。**
+  
+* **子事务挂起父事务 =》父子事务无关、无影响**
+
+##### **例子：** 必须是两个类的各一个方法。同一个类的2个方法无效。因为代理的原因**//todo**
+
+正确例子：
+
+ TParent：事务父亲方法  =   VideoServiceImpl里的ServerTransRequest   
+
+ TSon:        事务子方法   =    SysLogServiceImpl里的transLogSon
+
+
+
+**本文无特殊说明，则 子事务方法是封装在父事务方法里的。即异常捕获不抛出。**  因为，子事务没被封装，肯定会抛出到父事务方法，相当于父事务方法本身有异常抛出。
+
+**TParent:**   **父事务、** **即上文事务、**  **即调用方**
+
+```
+@Service("videoService")
+public class VideoServiceImpl extends ServiceImpl<VideoDao, VideoEntity> implements VideoService {
+
+
+    @Resource
+    SysLogService sysLogService;
+    
+    
+    @Override
+    @Transactional(isolation = Isolation.DEFAULT,propagation = Propagation.REQUIRED)  //此事务注解起作用
+    public void ServerTransRequest()  throws Exception{
+
+
+
+        VideoEntity video = new VideoEntity();
+        video.setVideoName(UUID.randomUUID().toString());
+        videoDao.insert(video);
+
+
+        try {
+             //throw  new RuntimeException();
+            
+           //实际起作用的是下面的 “ sysLogService.transLogSon();//这里面是一个独立的事务配置” ;等同于直接写sysLogService.transLogSon();	 
+            transLogSon();        
+            
+        
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        //throw  new RuntimeException();  //异常1001 TParent 异常  
+
+    }
+
+    @Transactional(propagation = Propagation.NEVER)  // 此事务注解不起作用
+    public void transLogSon() throws Exception {
+        sysLogService.transLogSon();//这里面是一个独立的事务配置，里的事务注解起作用，SysLogServiceImpl里
+        throw  new RuntimeException();  //此异常也不起作用,当然能到父事务方法里且被抛出肯定有作用。(相对于父事务方法里本身异常了)
+    }
+
+
+    
+```
+
+
+
+**TSon:**   **子事务、**  **即现在的事务、** **即被调用方**
+
+```
+@Service("sysLogService")
+public class SysLogServiceImpl extends ServiceImpl<SysLogDao, SysLogEntity> implements SysLogService {
+    @Override
+    @Transactional(isolation = Isolation.DEFAULT ,propagation = Propagation.REQUIRES_NEW)  //事务注解TSon 生效
+    public void transLogSon() throws Exception {
+        SysLogEntity sysLogEntity = new SysLogEntity();
+        sysLogEntity.setUsername(UUID.randomUUID().toString());
+        sysLogEntity.setTime(System.currentTimeMillis());
+        this.save(sysLogEntity);
+       // int i =1/0;
+        //throw  new RuntimeException();
+
+    }
+```
+
+
+
+自我理解，按 子事务为现在的事务；上文事务为父事务
+
+#### 传播级别
+
+#### 1、 默认，REQUIRED 。即@Transactional(isolation = Isolation.DEFAULT ,propagation = Propagation.REQUIRED)
+
+​		常用。一般没加Transactional没加参数就是默认此级别。
+
+​      上文无事务：新建事务；上文有事务，加入上文事务。==》**强调  加个事务一般情况（没有就新建，有就加入）**
+
+​		注意：加入上文事务情况下：如果子事务发生回滚，父子事务都将回滚，反之亦然
+
+**注：** **内层被封装捕获异常处理不抛出异常外层还是回滚！**凡是子事务加入（不是嵌套到）父事务都是如此，比如support、MANDATORY的加入父事务情况 。
+
+​		**REQUIRED**  和 **NESTED**  的区别就在此。**NESTED**   子事务回滚，父事务不会回滚。
+
+​       
 
 ​        
 
-#### 2、 support 
+#### 2、 support   ==》强调 子方法跟随性 
 
-​	若调用方 有事务，则加入其事务，没有按非事务的执行
+​	若上文事务，则加入其事务，没有按非事务的执行
 
 
 
 #### 3、MANDATORY
 
-​	若调用方/上下方有事务，则加入其事务，没有抛出异常。==》强制调用方必须有事务
+​	若调用方/上下方有事务，则加入其事务，没有抛出异常。==》**强调  必须上下文都有事务，否则异常**
 
 ​	**适用场景：** 查漏补缺，强行有事务
 
 ​						配置该方式的传播级别是有效的控制上下文调用代码遗漏添加事务控制的保证手段。比如一段代码不能单独被调用执行，但是一旦被调用，就必须有						事务包含的情况
 
-#### 4 、request_new
 
-​		若有事务，加入事务，没有则新建。把之前的事务挂起
 
-​        **适用场景** 
+#### 4 、request_new  ==》强调   新建事务，保持独立性
+
+​        上文有事务，挂起上文事务，新建当前事务。
+
+​        上文无事务，新建事务
+
+​         
+
+​       适用场景：两个事务互不影响；父事务回滚，不影响子事务。子事务回滚，不影响父事务。比如记录操作后，记录日志。操作和记录日志互不影响。
+
+​      上文回归
+
+​       
 
 #### 5、NOT_SUPPORTED 
 
-​      总是非事务的执行，若调用方存在事务，则挂起之前事务
+​      总是非事务的执行，若调用方存在事务，则挂起之前事务 ==> **强调 现在非事务，且上下文无关系/不跟随**
 
 #### 6、 NEVER
 
-​    总是非事务地执行，如果存在一个活动事务，则抛出异常。
+​    总是非事务地执行，如果存在一个活动事务，则抛出异常。 ==》**强调 上下文无事务，否则异常**
 
-#### 7、**NESTED**  
+#### 7、**NESTED**   嵌套
 
-   嵌套。如果上下文中存在事务，则嵌套事务执行，如果不存在事务，则新建事务（按REQUIRED）
+   嵌套。如果上下文中存在事务，则嵌套事务执行，如果不存在事务，则新建事务（按REQUIRED） ==》 **强调 子事务嵌套到父事务，不是加入**
 
-> 上下文中存在事务：
+  上文中存在事务：
 
-​        外层事务抛出异常回滚，那么内层事务必须回滚；
+​      外层事务回滚，那么内层事务必须回滚；
 
-​        嵌套的内层事务回滚情况下：
+​       **内存回滚，外层不回滚（这就是嵌套和REQUIRED 的区别）**。当然 父事务回滚，子事务必回滚。
 
-​     	*  **1 若被外层捕获抛出/没封装**  外内都回滚  
+   上文没有事务：
 
-​     	*  **2若被外层捕获处理/封装了**  外层不回滚，内层回滚。**此时就是和REQUIRED的区别，若都是外层REQUIRED，内层NESTED** ，REQUIRED哪怕封装处理了				内层。外层也会回滚。
+​      新建事务。
 
-​        
-
-外层事务不可回滚内存提交的事务？？？？//todo
+​     	
 
 
 
 
 
-### 
+ ### 多数据源情况呢？分布式情况呢？ //todo
 
