@@ -99,6 +99,8 @@ The so-called phantom problem occurs within a transaction when the same query pr
 
 ## 传播级别
 
+事务之间的传播影响，至少2个
+
 **PROPAGATION**  英[ˌprɒpə'ɡeɪʃ(ə)n]   传播
 
 **MANDATORY**  英[ˈmændətəri]  强制的; 法定的; 义务的;
@@ -155,7 +157,9 @@ public enum Propagation {
   
 * **子事务挂起父事务 =》父子事务无关、无影响**
 
-##### **例子：** 必须是两个类的各一个方法。同一个类的2个方法无效。因为代理的原因**//todo**
+##### **例子：** 必须是两个类的各一个方法。同一个类的2个方法无效（相当于子方法copy到父方法里，父类事务还是生效的，）。因为代理的原因**//todo**
+
+
 
 正确例子：
 
