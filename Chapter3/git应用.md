@@ -19,10 +19,16 @@ git remote remove origin
 **3、添加远程源**
 
 ```
-$ git remote add origin https://github.com/number-10/RH.git
+$ git remote add origin https://github.com/USERNAME/REPOSITORY.git
 ```
 
-注：https://github.com/number-10/RH.git 为在远程建的仓库
+**更改远程仓库的url**  
+
+ `git remote set-url` 命令将远程的 URL 从 HTTPS 更改为 SSH。 [官网链接](https://docs.github.com/cn/github/using-git/changing-a-remotes-url#switching-remote-urls-from-https-to-ssh)
+
+```shell
+$ git remote set-url origin git@github.com:USERNAME/REPOSITORY.git
+```
 
 **4、本地项目数据上传到新建的远程仓库分支，且建立联系**
 

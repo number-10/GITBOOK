@@ -92,3 +92,26 @@ From https://gitee.com/xxx
 ### <u>知识点：</u>  **--allow-unrelated-histories**
 
 对应中文释义：允许无关的历史记录
+
+
+
+## P2   does not appear to be a git repository
+
+场景：pull/push 代码，remote origin  是 git@xxxxx。
+
+```
+fatal: 'git@github.com/xxx/xxx' does not appear to be a git repository
+fatal: Could not read from remote repositor.
+```
+
+一般人：公钥没配。配成功后 `ssh -T git@github.com` 返回 Hi number-10! You've successfully authenticated, but GitHub does not provide shell access.
+
+我：**远程仓库地址错误** 。  git@github.com/xxx/xxx **不是/是：**    **git@github.com是后面跟着 ：**。
+
+**问题经历：**
+
+差一点就重新设置公钥了，由于测试是成功的，
+
+所以坚持没配，肯定有其它问题。网上都是说没配，哪想到我的错误如此简单。
+
+**总结：** 不要自己改，要从github上复制。能复制就不要手打。
