@@ -57,6 +57,17 @@ nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 nginx: configuration file /etc/nginx/nginx.conf test is successful
 ```
 
+没设置配置文件可能报错如下：
+
+[root@iz2ze56pkpg6dxap2z3qvzz nginx]# nginx -s reload
+nginx: [error] open() "/usr/local/nginx/logs/nginx.pid" failed (2: No such file or directory)
+
+设置即可解决
+
+
+
+
+
 #### [配置文件所在目录官网建议](https://docs.nginx.com/nginx/admin-guide/basic-functionality/managing-configuration-files/):
 
 /etc/nginx/nginx.conf 主功能配置文件
@@ -94,7 +105,7 @@ http {
     nobody    7262  1871  0 Feb04 ?        00:00:00 nginx: worker process
     nobody    7263  1871  0 Feb04 ?        00:00:00 nginx: worker process
     
-    ```
+  ```
 
 * **locate nginx.conf**
 

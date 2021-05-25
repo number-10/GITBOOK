@@ -9,20 +9,20 @@ oracle,dm7 数据库。mysql无此概念，可用视图
 
 **例子：**
 
-* 创建表A1 的同义词AS
+* 创建表A1 的同义词S1
 ```
-create public synonym AS for 表所属模式名.A1
+create public synonym S1 for 表所属模式名.A1
 
 ```
 
 * 赋权给READ用户  **是赋予原来的表名A1,而不是同义词名称AS**
 ```
-grant select on A1 to READ;
+grant select on S1 to READ;
 ```
 
 * 收回权限
 ```
-revoke select on A1 from YWKREAD;
+revoke select on S1 from YWKREAD;
 ```
 
 
@@ -30,7 +30,7 @@ revoke select on A1 from YWKREAD;
 * 删除公有同义词
 
 ```
-drop public synonym AS;
+drop public synonym S1;
 ```
 
 
