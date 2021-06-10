@@ -1,6 +1,6 @@
 # transacion
 
-
+[toc]
 
 
 # 事务
@@ -161,11 +161,71 @@ public enum Propagation {
 
 
 
-正确例子：
+* **正确例子1:**
 
  TParent：事务父亲方法  =   VideoServiceImpl里的ServerTransRequest   
 
  TSon:        事务子方法   =    SysLogServiceImpl里的transLogSon
+
+
+
+* **正确例子2（调用同一个类中的方法）。**TParent,TSon在一个类C1中。
+
+TParent中：
+
+```
+C1 thisBean = (AliOssService)SpringContextUtils.getBean("C1");
+boolean flag  = thisBean.Tson();
+```
+
+```
+@Component
+public class SpringContextUtils implements ApplicationContextAware {
+	public static ApplicationContext applicationContext; 
+
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext)
+			throws BeansException {
+		SpringContextUtils.applicationContext = applicationContext;
+	}
+
+	public static Object getBean(String name) {
+		return applicationContext.getBean(name);
+	}
+
+	public static <T> T getBean(String name, Class<T> requiredType) {
+		return applicationContext.getBean(name, requiredType);
+	}
+
+	public static boolean containsBean(String name) {
+		return applicationContext.containsBean(name);
+	}
+
+	public static boolean isSingleton(String name) {
+		return applicationContext.isSingleton(name);
+	}
+
+	public static Class<? extends Object> getType(String name) {
+		return applicationContext.getType(name);
+	}
+
+}
+```
+
+捕获后再 抛出异常：
+
+```java
+...
+}catch (Exception e){
+
+   e.printStackTrace();
+   //法一
+   throw new RuntimeException();
+   //法二
+   TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+
+}
+```
 
 
 
@@ -253,9 +313,39 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogDao, SysLogEntity> impl
 
 ​		注意：加入上文事务情况下：如果子事务发生回滚，父子事务都将回滚，反之亦然
 
-**注：** **内层被封装捕获异常处理不抛出异常外层还是回滚！**凡是子事务加入（不是嵌套到）父事务都是如此，比如support、MANDATORY的加入父事务情况 。
+**注：** **事务方法内层异常抛出到外层,外层事务捕获异常不在外层抛出，还是会全部回滚！(外层是通过代理调用内层,不是同一类上下调用)**；
 
-​		**REQUIRED**  和 **NESTED**  的区别就在此。**NESTED**   子事务回滚，父事务不会回滚。
+​		**凡是子事务加入（不是嵌套到）父事务都是如此，比如support、MANDATORY的加入父事务情况 。**
+
+​		**REQUIRED**  和 **NESTED（嵌套）**  的区别就在此。**NESTED**   子事务回滚，父事务不会回滚。
+
+例子：
+
+图A里面外层调用了  代理的事务方法 transLogSon(); 若transLogSon() 里有异常抛出，整体都会回滚（包括videoDao.insert(video)）。
+
+图B里面的外层事务方法自己内部异常，不会回滚。
+
+图C里面的内层事务方法自己内部异常，不会回滚，且不影响上层事务。
+
+**图A:**
+
+![image-20210610113036410](E:\GITBOOK\book1\Chapter888：888\assets\image-20210610113036410.png)
+
+​		           
+
+**图B:**
+
+![image-20210610134528858](E:\GITBOOK\book1\Chapter888：888\assets\image-20210610134528858.png)
+
+
+
+
+
+**图C**
+
+![image-20210610112833883](E:\GITBOOK\book1\Chapter888：888\assets\image-20210610112833883.png)
+
+
 
 ​       
 
@@ -314,8 +404,6 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogDao, SysLogEntity> impl
 ​      新建事务。
 
 ​     	
-
-
 
 
 
