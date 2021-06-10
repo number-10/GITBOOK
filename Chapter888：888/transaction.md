@@ -329,13 +329,13 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogDao, SysLogEntity> impl
 
 **图A:**
 
-![image-20210610113036410](E:\GITBOOK\book1\Chapter888：888\assets\image-20210610113036410.png)
+![image-20210610113036410](./assets/image-20210610113036410.png)
 
 ​		           
 
 **图B:**
 
-![image-20210610134528858](E:\GITBOOK\book1\Chapter888：888\assets\image-20210610134528858.png)
+![image-20210610134528858](./assets/image-20210610134528858.png)
 
 
 
@@ -343,7 +343,7 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogDao, SysLogEntity> impl
 
 **图C**
 
-![image-20210610112833883](E:\GITBOOK\book1\Chapter888：888\assets\image-20210610112833883.png)
+![image-20210610112833883](./assets/image-20210610112833883.png)
 
 
 
