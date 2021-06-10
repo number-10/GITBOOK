@@ -327,17 +327,14 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogDao, SysLogEntity> impl
 
 图C里面的内层事务方法自己内部异常，不会回滚，且不影响上层事务。
 
-**图A:**
+ **图A:**
 
-![image-20210610113036410](./assets/image-20210610113036410.png)
+![image-20210610113036410](./assets/image-20210610113036410.png)    
 
-​		           
 
 **图B:**
 
 ![image-20210610134528858](./assets/image-20210610134528858.png)
-
-
 
 
 
@@ -347,9 +344,7 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogDao, SysLogEntity> impl
 
 
 
-​       
-
-​        
+  
 
 #### 2、 support   ==》强调 子方法跟随性 
 
