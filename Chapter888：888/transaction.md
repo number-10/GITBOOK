@@ -161,7 +161,7 @@ public enum Propagation {
 
 
 
-* **正确例子1:**
+* **正确例子1:** 事务方法在不同的类中
 
  TParent：事务父亲方法  =   VideoServiceImpl里的ServerTransRequest   
 
@@ -169,13 +169,26 @@ public enum Propagation {
 
 
 
-* **正确例子2（调用同一个类中的方法）。**TParent,TSon在一个类C1中。
+> 下面例子前提
+>
+> ```
+> @Service("c1Service")
+> public class C1ServiceImpl    implements C1Service {
+> ```
+
+事务方法代码实现在C1ServiceImpl， 展示的代码在TParent方法中
+
+
+
+* **正确例子2-1（调用同一个类中的事务方法）。**TParent,TSon在一个类C1中。
 
 TParent中：
 
 ```
-C1 thisBean = (AliOssService)SpringContextUtils.getBean("C1");
-boolean flag  = thisBean.Tson();
+public void TParent(){
+    C1Service thisBean = (AliOssService)SpringContextUtils.getBean("c1Service");
+    boolean flag  = thisBean.Tson();
+}
 ```
 
 ```
@@ -211,6 +224,32 @@ public class SpringContextUtils implements ApplicationContextAware {
 
 }
 ```
+
+* **正确例子2-2（调用同一个类中的事务方法）：** AopContext.currentProxy()
+
+  ​     //在当前类上加此注解 @EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
+
+    否则会报：java.lang.IllegalStateException: Cannot find current proxy: Set 'exposeProxy' property on Advised to 'true' to make it available.
+
+  ```java
+  public void TParent(){   
+  		C1Service thisBean = (C1Service)AopContext.currentProxy());
+          boolean flag = thisBean.Tson();
+  }
+  ```
+
+* **正确例子2-3（自己调用自己）：**
+
+```java
+    @Autowired
+    C1Service c1Service;        
+
+    public void TParent(){   
+        boolean flag = c1Service.Tson();
+    }
+```
+
+
 
 捕获后再 抛出异常：
 
